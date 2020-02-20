@@ -4,10 +4,10 @@ FROM crops/poky:ubuntu-16.04
 
 USER root
 
-ENV HTTP_PROXY http://10.10.2.3:8080/ 
-ENV HTTPS_PROXY http://10.10.2.3:8080/ 
-ENV http_proxy http://10.10.2.3:8080/ 
-ENV https_proxy http://10.10.2.3:8080/
+#ENV HTTP_PROXY http://10.10.2.3:8080/ 
+#ENV HTTPS_PROXY http://10.10.2.3:8080/ 
+#ENV http_proxy http://10.10.2.3:8080/ 
+#ENV https_proxy http://10.10.2.3:8080/
 
 # delete all the apt list files since they're big and get stale quickly
 RUN  rm -rf /var/lib/apt/lists/*
