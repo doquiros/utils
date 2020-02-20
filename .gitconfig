@@ -1,0 +1,50 @@
+[user]
+	email = daniel.orellana@prodys.net
+	name = Daniel Orellana
+[color]
+	ui = auto
+[gc]
+	autoDetach = false
+[push]
+	default = simple
+[core]
+	editor = nano
+	excludesfile = ~/.gitignore_global 
+	sshCommand="ssh -i ~/devel/.ssh/id_rsa -oStrictHostKeyChecking=no "
+[merge]
+	tool = meld 
+[mergetool "kdiff3"]
+	path = /usr/bin/kdiff3
+[diff]
+	guitool = kdiff3
+[url "https://github.com/"]
+	insteadOf = git://github.com/
+[url "https://git.yoctoproject.org/"]
+	insteadOf = git://yoctoproject.org:
+[url "https://git.yoctoproject.org"]
+	insteadOf = git://yoctoproject.org
+[url "https://git.yoctoproject.org/git"]
+	insteadOf = git://git.yoctoproject.org
+[url "https://anonscm.debian.org/git"]
+	insteadOf = git://anonscm.debian.org
+[url "https://git.savannah.gnu.org/git"]
+	insteadOf = git://git.savannah.gnu.org
+[url "https://anongit.freedesktop.org/git"]
+	insteadOf = git://anongit.freedesktop.org
+[url "http://git.freescale.com/git/cgit.cgi"]
+	insteadOf = git://git.freescale.com
+[url "https://source.codeaurora.org"]
+	insteadOf = git://source.codeaurora.org
+[url "https://git.code.sf.net"]
+	insteadOF =  git://git.code.sf.net
+[url "http://10.10.2.15"]
+	insteadOF = http://prodysgitlab
+[url "ssh://git@10.10.2.15"]
+	insteadOF = ssh://git@prodysgitlab
+[url "https://git.alsa-project.org/http"]
+	insteadOf = git://git.alsa-project.org
+[alias]
+	changes = log --pretty=oneline --abbrev-commit HEAD@{upstream}..HEAD
+	rbi = rebase --autosquash -i HEAD@{upstream}
+[http]
+	sslVerify = false
