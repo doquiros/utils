@@ -1,13 +1,7 @@
 FROM scratch
-ENV DEBIAN_FRONTEND noninteractive
 FROM crops/poky:ubuntu-16.04
 
 USER root
-
-#ENV HTTP_PROXY http://10.10.2.3:8080/ 
-#ENV HTTPS_PROXY http://10.10.2.3:8080/ 
-#ENV http_proxy http://10.10.2.3:8080/ 
-#ENV https_proxy http://10.10.2.3:8080/
 
 # delete all the apt list files since they're big and get stale quickly
 RUN  rm -rf /var/lib/apt/lists/*
@@ -24,10 +18,10 @@ RUN mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
 CMD ["/bin/bash"]
 
 #YOCTO QUICKSTART:
-RUN apt-get update --fix-missing
+RUN DEBIAN_FRONTEND=noninteractive apt-get update --fix-missing
     
-RUN apt-get install -yq apt-utils
-RUN apt-get install -yq cpio \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq apt-utils
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq cpio \
                         netpbm \
                         otf2bdf \
                         libbogl-dev \
@@ -67,8 +61,8 @@ RUN apt-get install -yq cpio \
                         sshfs \
                         inetutils-ping
 RUN echo yes > yes.txt
-RUN apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install grub-common grub-pc-bin grub-imageboot < yes.txt
-RUN apt-get install -yq  xorriso genisoimage  < yes.txt
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install grub-common grub-pc-bin grub-imageboot < yes.txt
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq  xorriso genisoimage  < yes.txt
     
 RUN useradd -ms /bin/bash developer -p $(openssl passwd -crypt developer)
 ADD .gitconfig /home/developer/.gitconfig
@@ -80,17 +74,8 @@ RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
 RUN localedef -i en_US -f UTF-8 en_US.UTF-8
 
-RUN export uid=1001 gid=1001 && \
-    mkdir -p /home/developer && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
-
-RUN echo -e "prodysgitlab 10.10.2.15" >> /etc/hosts
-RUN mkdir -p /home/developer/devel
-RUN chown developer:developer /home/developer/devel
-RUN chmod 0666 /home/developer/devel
-VOLUME /home/developer
+RUN echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    chmod 0440 /etc/sudoers.d/developer
 
 # overwrite this with 'CMD []' in a dependent Dockerfile
 ENTRYPOINT [""]
