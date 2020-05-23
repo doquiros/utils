@@ -8,6 +8,8 @@ declare -a valid_formats=( \
 "720p60" \
 "1080i50" \
 "1080i60" \
+"1080p25" \
+"1080p30" \
 )
 
 declare -A format2ceamode=( \
@@ -15,6 +17,8 @@ declare -A format2ceamode=( \
 [720p60]=4 \
 [1080i50]=20 \
 [1080i60]=5 \
+[1080p25]=33 \
+[1080p30]=34 \
 )
 
 declare -A format2width=( \
@@ -22,6 +26,8 @@ declare -A format2width=( \
 [720p60]=1280 \
 [1080i50]=1920 \
 [1080i60]=1920 \
+[1080p25]=1920 \
+[1080p30]=1920 \
 )
 
 declare -A format2height=( \
@@ -29,6 +35,8 @@ declare -A format2height=( \
 [720p60]=720 \
 [1080i50]=1080 \
 [1080i60]=1080 \
+[1080p25]=1080 \
+[1080p30]=1080 \
 )
 
 print_usage () {
